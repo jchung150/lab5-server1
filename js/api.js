@@ -44,28 +44,32 @@ class APIs {
       }
 
       const result = await response.json();
-      const resultContainer = document.getElementById("result-container");
-      resultContainer.innerHTML = `
-        <table>
-          <tr>
-            <th>${this.userStrings.tableHeaders.patientID}</th>
-            <th>${this.userStrings.tableHeaders.name}</th>
-            <th>${this.userStrings.tableHeaders.dateOfBirth}</th>
-          </tr>
-          ${result.results
-            .map(
-              (row) => `
+      if (query.startsWith("SELECT")) {
+        const resultContainer = document.getElementById("result-container");
+        resultContainer.innerHTML = `
+          <table>
             <tr>
-                <td>${row.patientID}</td>
-                <td>${row.name}</td>
-                <td>${formatDate(row.dateOfBirth)}</td>
+              <th>${this.userStrings.tableHeaders.patientID}</th>
+              <th>${this.userStrings.tableHeaders.name}</th>
+              <th>${this.userStrings.tableHeaders.dateOfBirth}</th>
             </tr>
-          `
-            )
-            .join("")}
-        </table>
-      `;
-      console.log("Server response:", result);
+            ${result.results
+              .map(
+                (row) => `
+              <tr>
+                  <td>${row.patientID}</td>
+                  <td>${row.name}</td>
+                  <td>${formatDate(row.dateOfBirth)}</td>
+              </tr>
+            `
+              )
+              .join("")}
+          </table>
+        `;
+        console.log("Server response:", result);
+      } else if (query.startsWith("INSERT")) {
+        console.log("Server response:", result);
+      }
     } catch (error) {
       if (error) {
         console.error("Error: ", error);
