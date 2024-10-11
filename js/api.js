@@ -12,7 +12,7 @@ import { userStrings } from "./../lang/en/en.js";
 
 class APIs {
   constructor() {
-    this.url = "http://localhost:3002/lab5/api/";
+    this.url = "https://potipress.com/lab5/api";
     this.userStrings = userStrings;
     this.init();
   }
